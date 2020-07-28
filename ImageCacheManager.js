@@ -13,7 +13,7 @@ module.exports = (defaultOptions = {}, urlCache = MemoryCache, fs = fsUtils, pat
         ttl: 60 * 60 * 24 * 14, // 2 weeks
         useQueryParamsInCacheKey: false,
         cacheLocation: fs.getCacheDir(),
-        allowSelfSignedSSL: false,
+        allowSelfSignedSSL: true,
     };
 
     // apply default options
@@ -74,11 +74,11 @@ module.exports = (defaultOptions = {}, urlCache = MemoryCache, fs = fsUtils, pat
          * @param options
          * @returns {Promise}
          */
-        downloadAndCacheUrl(url, options = {}) {
+        downloadAndCacheUrl(url, options = {}) { 
             return cacheUrl(
                 url,
                 options,
-                filePath => fs.downloadFile(url, filePath, options.headers)
+                filePath => fs.downloadFile(url, filePath, options.headers,options)
             );
         },
 
